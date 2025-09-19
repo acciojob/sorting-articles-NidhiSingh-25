@@ -13,15 +13,11 @@
       margin-bottom: 20px;
     }
     ul#band {
-      list-style: none;
-      padding: 0;
+      list-style-type: square;  /* 🔲 Square filled bullets */
+      padding-left: 20px;       /* spacing for bullets */
     }
     ul#band li {
-      padding: 6px 10px;
-      background: #fff;
-      margin-bottom: 5px;
-      border-radius: 5px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      padding: 6px 0;
     }
   </style>
 </head>
@@ -46,17 +42,14 @@
       'An Old Dog'
     ];
 
-    // Function to strip leading 'a', 'an', 'the'
     function stripArticle(name) {
       return name.replace(/^(a |an |the )/i, '').trim();
     }
 
-    // Sort bands ignoring articles
     const sortedBands = bands.sort((a, b) => {
       return stripArticle(a).localeCompare(stripArticle(b));
     });
 
-    // Display in UL
     const ul = document.getElementById('band');
     sortedBands.forEach(band => {
       const li = document.createElement('li');

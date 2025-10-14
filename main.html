@@ -1,28 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bands List (Alphabetically Sorted)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+		 background-image: url("C:\Users\DELL\Downloads\218320592-e82de1d4-dca2-4a76-901a-7ca5c5b3fc95.png");
+      background-size: cover;         /* Makes image cover entire screen */
+      background-position: center;    /* Centers the image */
+      background-repeat: no-repeat;   /* Prevents repeating tiles */
       background: #f9f9f9;
-      padding: 20px;
+      text-align: center;
+      padding: 40px;
     }
+
     h1 {
       margin-bottom: 20px;
+      color: #333;
     }
-    ul#band {
-      list-style-type: square;  /* 🔲 Square filled bullets */
-      padding-left: 20px;       /* spacing for bullets */
 
+    ul {
+      list-style-type: square; /* ✅ solid square bullets */
+      text-align: left;
+      max-width: 350px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    ul#band li {
-      padding: 6px 0;
+
+    li {
+      padding: 8px 0;
+      font-size: 16px;
+      color: #444;
+      border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
 <body>
- 
+  <h1>Bands</h1>
   <ul id="band"></ul>
 
   <script>
@@ -34,26 +57,27 @@
       'The Bled',
       'Say Anything',
       'The Midway State',
+      'We Came as Romans',
       'Counterparts',
       'Oh, Sleeper',
+      'A Skylit Drive',
       'Anywhere But Here',
       'An Old Dog'
     ];
 
-    function stripArticle(name) {
-      return name.replace(/^(a |an |the )/i, '').trim();
+    // Function to remove 'A', 'An', 'The' for sorting
+    function strip(bandName) {
+      return bandName.replace(/^(a |an |the )/i, '').trim();
     }
 
-    const sortedBands = bands.sort((a, b) => {
-      return stripArticle(a).localeCompare(stripArticle(b));
-    });
+    // Sort the array ignoring those words
+    const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 
-    const ul = document.getElementById('band');
-    sortedBands.forEach(band => {
-      const li = document.createElement('li');
-      li.textContent = band;
-      ul.appendChild(li);
-    });
+    // Display in the list
+    document.getElementById('band').innerHTML =
+      sortedBands.map(band => `<li>${band}</li>`).join('');
   </script>
 </body>
 </html>
+
+
